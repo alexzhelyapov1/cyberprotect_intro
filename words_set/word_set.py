@@ -15,15 +15,11 @@ def combination_weights(words):
     for word in words:
         for i in range(len(word) - combination_len + 1):
             combination = word[i : combination_len + i]
-            # print(combination, end=" ")
+
             if (combination not in weights.keys()):
                 weights[combination] = 1
             else:
                 weights[combination] += 1
-        # print("")
-
-    # for key in weights.keys():
-    #     print(key, weights[key])
     
     return weights
 
@@ -36,7 +32,6 @@ def word_weights(words, combination_weights):
             continue
         else:
             word_weights[word] = min([combination_weights[word[i : combination_len + i]] for i in range(len(word) - combination_len + 1)])
-            # print(word, min([combination_weights[word[i : combination_len + i]] for i in range(len(word) - combination_len + 1)]))
     
     return word_weights
     
@@ -50,9 +45,7 @@ with open(input_filename, "r") as input_file:
     buffer = input_file.read(buffer_size)
 
 
-words = buffer.split()
-combination_weights = combination_weights(words)
-word_weights = word_weights(words, combination_weights)
+word_weights = word_weights(buffer.split(), combination_weights(words))
 
 
 # Write down into the file
