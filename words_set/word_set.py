@@ -45,12 +45,11 @@ with open(input_filename, "r") as input_file:
     buffer = input_file.read(buffer_size)
 
 
-word_weights = word_weights(buffer.split(), combination_weights(words))
+word_weights = word_weights(buffer.split(), combination_weights(buffer.split()))
 
 
 # Write down into the file
 with open(output_filename, "w") as output_file:
     result = sorted(word_weights, reverse=True, key=lambda item: word_weights[item])
-    print(result)
     for i in range(len(result)):
         output_file.write(result[i] + " ")
